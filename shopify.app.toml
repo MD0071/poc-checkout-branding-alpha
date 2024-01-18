@@ -1,0 +1,27 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+name = "poc-checkoout-branding"
+client_id = "9bd630d8a02451b78229f816cd343ff5"
+application_url = "https://critical-desire-gospel-babies.trycloudflare.com"
+embedded = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products,read_checkout_branding_settings,write_checkout_branding_settings,read_checkouts,write_checkouts"
+
+[auth]
+redirect_urls = [
+  "https://critical-desire-gospel-babies.trycloudflare.com/auth/callback",
+  "https://critical-desire-gospel-babies.trycloudflare.com/auth/shopify/callback",
+  "https://critical-desire-gospel-babies.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-01"
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "nonedit.myshopify.com"
