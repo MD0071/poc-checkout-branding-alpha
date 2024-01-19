@@ -11,10 +11,11 @@ import {
   Box,
 } from "@shopify/polaris";
 import { authenticate } from "../shopify.server";
-import { useState, useCallback } from "react";
-
+import { useState, useCallback, useEffect } from "react";
+import { PrismaClient } from "@prisma/client";
 export const loader = async ({ request }) => {
   const { admin } = await authenticate.admin(request);
+  const prisma = new PrismaClient();
   const response2 = await admin.graphql(
     `#graphql
     query getcheckoutProfiles{
@@ -28,23 +29,59 @@ export const loader = async ({ request }) => {
       }
     }`
   );
+  const allUsers = await prisma.checkoutCustomization.findMany();
   const data = await response2.json();
   return json({
     checkoutProfiles: data.data.checkoutProfiles.edges,
+    allUsers: allUsers,
   });
 };
 
 export const action = async ({ request }) => {
   const { admin } = await authenticate.admin(request);
+  const prisma = new PrismaClient();
   const requestBody = await request.text();
   const formData = new URLSearchParams(requestBody);
   const selected1 = formData.get("selectedone");
   const selected2 = formData.get("selectedtwo");
   const selected3 = formData.get("selectedthree");
   const brandingid = formData.get("checkoputid");
+  try {
+    const existingEntry = await prisma.checkoutCustomization.findFirst({
+      where: {
+        brandingid: brandingid,
+      },
+    });
 
-  const response = await admin.graphql(
-    `#graphql
+    if (existingEntry) {
+      // Update the existing entry
+      const updatedEntry = await prisma.checkoutCustomization.update({
+        where: {
+          id: existingEntry.id,
+        },
+        data: {
+          selected1,
+          selected2,
+          selected3,
+        },
+      });
+
+      console.log("Data updated:", updatedEntry);
+    } else {
+      // Create a new entry
+      const result = await prisma.checkoutCustomization.create({
+        data: {
+          selected1,
+          selected2,
+          selected3,
+          brandingid,
+        },
+      });
+
+      console.log("Data inserted:", result);
+    }
+    const response = await admin.graphql(
+      `#graphql
       mutation checkoutBrandingUpsert($checkoutBrandingInput: CheckoutBrandingInput!, $checkoutProfileId: ID!) {
         checkoutBrandingUpsert(
           checkoutBrandingInput: $checkoutBrandingInput
@@ -90,58 +127,65 @@ export const action = async ({ request }) => {
           }
         }
       }`,
-    {
-      variables: {
-        checkoutProfileId: brandingid,
-        checkoutBrandingInput: {
-          customizations: {
-            global: {
-              cornerRadius: "NONE",
-              typography: {
-                letterCase: "LOWER",
-                kerning: "LOOSE",
+      {
+        variables: {
+          checkoutProfileId: brandingid,
+          checkoutBrandingInput: {
+            customizations: {
+              global: {
+                cornerRadius: "NONE",
+                typography: {
+                  letterCase: "LOWER",
+                  kerning: "LOOSE",
+                },
               },
-            },
-            headingLevel1: {
-              typography: {
-                font: "PRIMARY",
-                size: selected1,
-                weight: "BOLD",
-                letterCase: "UPPER",
-                kerning: "BASE",
+              headingLevel1: {
+                typography: {
+                  font: "PRIMARY",
+                  size: selected1,
+                  weight: "BOLD",
+                  letterCase: "UPPER",
+                  kerning: "BASE",
+                },
               },
-            },
-            headingLevel2: {
-              typography: {
-                font: "PRIMARY",
-                size: selected2,
-                weight: "BASE",
-                letterCase: "UPPER",
-                kerning: "LOOSE",
+              headingLevel2: {
+                typography: {
+                  font: "PRIMARY",
+                  size: selected2,
+                  weight: "BASE",
+                  letterCase: "UPPER",
+                  kerning: "LOOSE",
+                },
               },
-            },
-            headingLevel3: {
-              typography: {
-                font: "PRIMARY",
-                size: selected3,
-                weight: "BASE",
-                letterCase: "UPPER",
-                kerning: "LOOSE",
+              headingLevel3: {
+                typography: {
+                  font: "PRIMARY",
+                  size: selected3,
+                  weight: "BASE",
+                  letterCase: "UPPER",
+                  kerning: "LOOSE",
+                },
               },
             },
           },
         },
-      },
-    }
-  );
-  const responseJson = await response.json();
-  return json({
-    product: responseJson,
-  });
+      }
+    );
+    const responseJson = await response.json();
+    return json({
+      product: responseJson,
+    });
+  } catch (error) {
+    console.error("Error inserting data:", error);
+    return json({ error: "Error inserting data" }, { status: 500 });
+  } finally {
+    await prisma.$disconnect();
+  }
 };
 export default function Index() {
   const nav = useNavigation();
-  const { checkoutProfiles } = useLoaderData();
+  const { checkoutProfiles, allUsers } = useLoaderData();
+  console.log(allUsers, "data base data");
   const submit = useSubmit();
   const isLoading =
     ["loading", "submitting"].includes(nav.state) && nav.formMethod === "POST";
@@ -149,6 +193,24 @@ export default function Index() {
   const [selectedtwo, setSelectedtwo] = useState("BASE");
   const [selectedthree, setSelectedthree] = useState("BASE");
   const [checkoputid, setCheckoputid] = useState(null);
+  useEffect(() => {
+    if (allUsers && allUsers.length > 0) {
+      const userWithCheckoputid = allUsers.find(
+        (user) => user.brandingid === checkoputid
+      );
+
+      if (userWithCheckoputid) {
+        setSelectedone(userWithCheckoputid.selected1);
+        setSelectedtwo(userWithCheckoputid.selected2);
+        setSelectedthree(userWithCheckoputid.selected3);
+      } else {
+        // If the checkoputid doesn't match any user, set defaults
+        setSelectedone("BASE");
+        setSelectedtwo("BASE");
+        setSelectedthree("BASE");
+      }
+    }
+  }, [allUsers, checkoputid]);
   const handleSelectChangeone = useCallback(
     (value) => setSelectedone(value),
     []
