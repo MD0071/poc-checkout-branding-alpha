@@ -16,15 +16,12 @@ model Post {
   body      String
   createdAt DateTime
   updatedAt DateTime @updatedAt
-  shop      String
 }
 
 model CheckoutCustomization {
-  id         String @id @default(auto()) @map("_id") @db.ObjectId
-  selected1  String
-  selected2  String
-  selected3  String
-  brandingid String
+  id             String @id @default(auto()) @map("_id") @db.ObjectId
+  brandingid     String
+  customizations Json
 }
 
 model Session {

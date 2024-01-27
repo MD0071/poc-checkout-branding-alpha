@@ -2,7 +2,7 @@
 
 name = "poc-checkoout-branding"
 client_id = "9bd630d8a02451b78229f816cd343ff5"
-application_url = "https://documents-include-instruction-soup.trycloudflare.com"
+application_url = "https://yukon-associated-disposition-bennett.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -11,9 +11,9 @@ scopes = "write_products,read_checkout_branding_settings,write_checkout_branding
 
 [auth]
 redirect_urls = [
-  "https://documents-include-instruction-soup.trycloudflare.com/auth/callback",
-  "https://documents-include-instruction-soup.trycloudflare.com/auth/shopify/callback",
-  "https://documents-include-instruction-soup.trycloudflare.com/api/auth/callback"
+  "https://yukon-associated-disposition-bennett.trycloudflare.com/auth/callback",
+  "https://yukon-associated-disposition-bennett.trycloudflare.com/auth/shopify/callback",
+  "https://yukon-associated-disposition-bennett.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

@@ -13,6 +13,7 @@ import {
 import { authenticate } from "../shopify.server";
 import { useState, useCallback, useEffect } from "react";
 import { PrismaClient } from "@prisma/client";
+// import { CheckoutCustomization } from "./models";
 export const loader = async ({ request }) => {
   const { admin } = await authenticate.admin(request);
   const prisma = new PrismaClient();
@@ -30,10 +31,12 @@ export const loader = async ({ request }) => {
     }`
   );
   const allUsers = await prisma.checkoutCustomization.findMany();
+  const shop = await admin?.rest?.session?.shop;
   const data = await response2.json();
   return json({
     checkoutProfiles: data.data.checkoutProfiles.edges,
     allUsers: allUsers,
+    shop: shop,
   });
 };
 
@@ -45,8 +48,24 @@ export const action = async ({ request }) => {
   const selected1 = formData.get("selectedone");
   const selected2 = formData.get("selectedtwo");
   const selected3 = formData.get("selectedthree");
+  const shop = formData.get("shop");
   const brandingid = formData.get("checkoputid");
+
   try {
+    // const existingEntrys = await CheckoutCustomization.findOne({ brandingid });
+    // console.log(existingEntrys, "⭐⭐⭐");
+    // if (existingEntry) {
+    //   existingEntry.customizations = { selected1, selected2, selected3, shop };
+    //   const updatedEntry = await existingEntry.save();
+    //   console.log("Data updated:", updatedEntry);
+    // } else {
+    //   const newEntry = new CheckoutCustomization({
+    //     brandingid,
+    //     customizations: { selected1, selected2, selected3, shop },
+    //   });
+    //   const result = await newEntry.save();
+    //   console.log("Data inserted:", result);
+    // }
     const existingEntry = await prisma.checkoutCustomization.findFirst({
       where: {
         brandingid: brandingid,
@@ -60,25 +79,21 @@ export const action = async ({ request }) => {
           id: existingEntry.id,
         },
         data: {
-          selected1,
-          selected2,
-          selected3,
+          customizations: { selected1, selected2, selected3, shop },
         },
       });
 
-      console.log("Data updated:", updatedEntry);
+      console.log("Data updated:😅", updatedEntry);
     } else {
       // Create a new entry
       const result = await prisma.checkoutCustomization.create({
         data: {
-          selected1,
-          selected2,
-          selected3,
           brandingid,
+          customizations: { selected1, selected2, selected3, shop },
         },
       });
 
-      console.log("Data inserted:", result);
+      console.log("Data inserted:😥", result);
     }
     const response = await admin.graphql(
       `#graphql
@@ -184,8 +199,8 @@ export const action = async ({ request }) => {
 };
 export default function Index() {
   const nav = useNavigation();
-  const { checkoutProfiles, allUsers } = useLoaderData();
-  console.log(allUsers, "data base data");
+  const { checkoutProfiles, allUsers, shop } = useLoaderData();
+  // console.log(allUsers, "data base data🤣");
   const submit = useSubmit();
   const isLoading =
     ["loading", "submitting"].includes(nav.state) && nav.formMethod === "POST";
@@ -200,9 +215,9 @@ export default function Index() {
       );
 
       if (userWithCheckoputid) {
-        setSelectedone(userWithCheckoputid.selected1);
-        setSelectedtwo(userWithCheckoputid.selected2);
-        setSelectedthree(userWithCheckoputid.selected3);
+        setSelectedone(userWithCheckoputid.customizations.selected1);
+        setSelectedtwo(userWithCheckoputid.customizations.selected2);
+        setSelectedthree(userWithCheckoputid.customizations.selected3);
       } else {
         // If the checkoputid doesn't match any user, set defaults
         setSelectedone("BASE");
@@ -264,7 +279,7 @@ export default function Index() {
 
   const generateProduct = () =>
     submit(
-      { selectedone, selectedtwo, selectedthree, checkoputid },
+      { selectedone, selectedtwo, selectedthree, checkoputid, shop },
       { replace: true, method: "POST" }
     );
   return (
