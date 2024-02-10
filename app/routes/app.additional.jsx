@@ -10,6 +10,7 @@ import {
   Select,
   Box,
   ButtonGroup,
+  ExceptionList,
 } from "@shopify/polaris";
 import { authenticate } from "../shopify.server";
 import { useState, useCallback, useEffect } from "react";
@@ -47,16 +48,89 @@ export const action = async ({ request }) => {
   const requestBody = await request.text();
   const formData = new URLSearchParams(requestBody);
   const cornerRadius = formData.get("cornerRadius");
+  const choiceListgroupspacing = formData.get("choiceListgroupspacing");
   const controlCorner = formData.get("controlCorner");
   const controlBorder = formData.get("controlBorder");
   const controLabelPosition = formData.get("controLabelPosition");
   const merchandiseThumbnailBorder = formData.get("merchandiseThumbnailBorder");
+  const primaryButtonbackground = formData.get("primaryButtonbackground");
+  const primaryButtonborder = formData.get("primaryButtonborder");
+  const primaryCornerRadius = formData.get("primaryCornerRadius");
+  const primaryBlockPadding = formData.get("primaryBlockPadding");
+  const primaryInlinePadding = formData.get("primaryInlinePadding");
+  const primarySize = formData.get("primarySize");
+  const primaryfont = formData.get("primaryfont");
+  const primaryWeight = formData.get("primaryWeight");
+  const primaryLetterCase = formData.get("primaryLetterCase");
+  const primaryKerning = formData.get("primaryKerning");
+  const secondryButtonbackground = formData.get("secondryButtonbackground");
+  const secondryButtonborder = formData.get("secondryButtonborder");
+  const secondryCornerRadius = formData.get("secondryCornerRadius");
+  const secondryBlockPadding = formData.get("secondryBlockPadding");
+  const secondryInlinePadding = formData.get("secondryInlinePadding");
+  const secondryfont = formData.get("secondryfont");
+  const secondrySize = formData.get("secondrySize");
+  const secondryWeight = formData.get("secondryWeight");
+  const secondryLetterCase = formData.get("secondryLetterCase");
+  const secondryKerning = formData.get("secondryKerning");
+  const selectborder = formData.get("selectborder");
+  const selectfont = formData.get("selectfont");
+  const selectsize = formData.get("selectsize");
+  const selectweight = formData.get("selectweight");
+  const selectkerning = formData.get("selectkerning");
+  const selectletterCase = formData.get("selectletterCase");
+  const textFieldborder = formData.get("textFieldborder");
+  const textFieldfont = formData.get("textFieldfont");
+  const textFieldsize = formData.get("textFieldsize");
+  const textFieldweight = formData.get("textFieldweight");
+  const textFieldletterCase = formData.get("textFieldletterCase");
+  const textFieldkerning = formData.get("textFieldkerning");
   const merchandiseThumbnailCornerRadius = formData.get(
     "merchandiseThumbnailCornerRadius"
   );
   const shop = formData.get("shop");
   const brandingid = formData.get("checkoputid");
-
+  console.log({
+    cornerRadius,
+    choiceListgroupspacing,
+    controlCorner,
+    controlBorder,
+    controLabelPosition,
+    merchandiseThumbnailBorder,
+    primaryButtonbackground,
+    primaryButtonborder,
+    primaryCornerRadius,
+    primaryBlockPadding,
+    primaryInlinePadding,
+    primarySize,
+    primaryfont,
+    primaryWeight,
+    primaryLetterCase,
+    primaryKerning,
+    secondryButtonbackground,
+    secondryButtonborder,
+    secondryCornerRadius,
+    secondryBlockPadding,
+    secondryInlinePadding,
+    secondryfont,
+    secondrySize,
+    secondryWeight,
+    secondryLetterCase,
+    secondryKerning,
+    selectborder,
+    selectfont,
+    selectsize,
+    selectweight,
+    selectkerning,
+    selectletterCase,
+    textFieldborder,
+    textFieldfont,
+    textFieldsize,
+    textFieldweight,
+    textFieldletterCase,
+    textFieldkerning,
+    merchandiseThumbnailCornerRadius,
+  });
   try {
     // const existingEntrys = await CheckoutCustomization.findOne({ brandingid });
     // console.log(existingEntrys, "⭐⭐⭐");
@@ -196,7 +270,7 @@ export const action = async ({ request }) => {
               },
               choiceList: {
                 group: {
-                  spacing: "NONE",
+                  spacing: choiceListgroupspacing,
                 },
               },
               control: {
@@ -209,51 +283,51 @@ export const action = async ({ request }) => {
                 cornerRadius: merchandiseThumbnailCornerRadius,
               },
               primaryButton: {
-                background: "NONE",
-                border: "NONE",
-                cornerRadius: "NONE",
-                blockPadding: "NONE",
-                inlinePadding: "NONE",
+                background: primaryButtonbackground,
+                border: primaryButtonborder,
+                cornerRadius: primaryCornerRadius,
+                blockPadding: primaryBlockPadding,
+                inlinePadding: primaryInlinePadding,
                 typography: {
-                  font: "PRIMARY",
-                  size: "EXTRA_SMALL",
-                  weight: "BASE",
-                  letterCase: "LOWER",
-                  kerning: "BASE",
+                  font: primaryfont,
+                  size: primarySize,
+                  weight: primaryWeight,
+                  letterCase: primaryLetterCase,
+                  kerning: primaryKerning,
                 },
               },
               secondaryButton: {
-                background: "NONE",
-                border: "NONE",
-                cornerRadius: "NONE",
-                blockPadding: "NONE",
-                inlinePadding: "NONE",
+                background: secondryButtonbackground,
+                border: secondryButtonborder,
+                cornerRadius: secondryCornerRadius,
+                blockPadding: secondryBlockPadding,
+                inlinePadding: secondryInlinePadding,
                 typography: {
-                  font: "PRIMARY",
-                  size: "EXTRA_SMALL",
-                  weight: "BASE",
-                  letterCase: "LOWER",
-                  kerning: "BASE",
+                  font: secondryfont,
+                  size: secondrySize,
+                  weight: secondryWeight,
+                  letterCase: secondryLetterCase,
+                  kerning: secondryKerning,
                 },
               },
               select: {
-                border: "NONE",
+                border: selectborder,
                 typography: {
-                  font: "PRIMARY",
-                  size: "EXTRA_SMALL",
-                  weight: "BASE",
-                  letterCase: "LOWER",
-                  kerning: "BASE",
+                  font: selectfont,
+                  size: selectsize,
+                  weight: selectweight,
+                  letterCase: selectletterCase,
+                  kerning: selectkerning,
                 },
               },
               textField: {
-                border: "NONE",
+                border: textFieldborder,
                 typography: {
-                  font: "PRIMARY",
-                  size: "EXTRA_SMALL",
-                  weight: "BASE",
-                  letterCase: "LOWER",
-                  kerning: "BASE",
+                  font: textFieldfont,
+                  size: textFieldsize,
+                  weight: textFieldweight,
+                  letterCase: textFieldletterCase,
+                  kerning: textFieldkerning,
                 },
               },
             },
@@ -282,13 +356,46 @@ export default function AdditionalPage() {
   const [checkoputid, setCheckoputid] = useState(null);
   const [controlCorner, setControlCorner] = useState("BASE");
   const [controlBorder, setControlBorder] = useState("");
+  const [choiceListgroupspacing, setChoiceListgroupspacing] = useState("");
   const [controLabelPosition, setControlLabelPosition] = useState("");
   const [
     merchandiseThumbnailCornerRadius,
     setMerchandiseThumbnailCornerRadius,
   ] = useState("");
+  const [primaryButtonbackground, setPrimaryButtonbackground] = useState("");
   const [merchandiseThumbnailBorder, setMerchandiseThumbnailBorder] =
     useState("");
+  const [primaryButtonborder, setPrimaryButtonborder] = useState("");
+  const [primaryCornerRadius, setPrimaryCornerRadius] = useState("");
+  const [primaryBlockPadding, setPrimaryBlockPadding] = useState("");
+  const [primaryInlinePadding, setPrimaryInlinePadding] = useState("");
+  const [primaryfont, setPrimaryfont] = useState("");
+  const [primarySize, setPrimarySize] = useState("");
+  const [primaryWeight, setPrimaryWeight] = useState("");
+  const [primaryLetterCase, setPrimaryLetterCase] = useState("");
+  const [primaryKerning, setPrimaryKerning] = useState("");
+  const [secondryButtonbackground, setSecondryButtonbackground] = useState("");
+  const [secondryButtonborder, setSecondryButtonborder] = useState("");
+  const [secondryCornerRadius, setSecondryCornerRadius] = useState("");
+  const [secondryBlockPadding, setSecondryBlockPadding] = useState("");
+  const [secondryInlinePadding, setSecondryInlinePadding] = useState("");
+  const [secondryfont, setSecondryfont] = useState("");
+  const [secondrySize, setSecondrySize] = useState("");
+  const [secondryWeight, setSecondryWeight] = useState("");
+  const [secondryLetterCase, setSecondryLetterCase] = useState("");
+  const [secondryKerning, setSecondryKerning] = useState("");
+  const [selectborder, setSelectborder] = useState("");
+  const [selectfont, setSelectfont] = useState("");
+  const [selectsize, setSelectsize] = useState("");
+  const [selectweight, setSelectweight] = useState("");
+  const [selectkerning, setSelectkerning] = useState("");
+  const [selectletterCase, setSelectletterCase] = useState("");
+  const [textFieldborder, setTextFieldborder] = useState("");
+  const [textFieldfont, setTextFieldfont] = useState("");
+  const [textFieldsize, setTextFieldsize] = useState("");
+  const [textFieldweight, setTextFieldweight] = useState("");
+  const [textFieldletterCase, setTextFieldletterCase] = useState("");
+  const [textFieldkerning, setTextFieldkerning] = useState("");
   // useEffect(() => {
   //   if (allUsers && allUsers.length > 0) {
   //     const userWithCheckoputid = allUsers.find(
@@ -303,6 +410,14 @@ export default function AdditionalPage() {
   //   }
   // }, [allUsers, checkoputid]);
   const handlecornerRadius = useCallback((value) => setCornerRadius(value), []);
+  const handlSelectletterCase = useCallback(
+    (value) => setSelectletterCase(value),
+    []
+  );
+  const handlechoiceListgroupspacing = useCallback(
+    (value) => setChoiceListgroupspacing(value),
+    []
+  );
   const handlemerchandiseThumbnailBorder = useCallback(
     (value) => setMerchandiseThumbnailBorder(value),
     []
@@ -320,7 +435,103 @@ export default function AdditionalPage() {
     (value) => setMerchandiseThumbnailCornerRadius(value),
     []
   );
-
+  const handlPrimaryButtonbackground = useCallback(
+    (value) => setPrimaryButtonbackground(value),
+    []
+  );
+  const handlPrimaryButtonborder = useCallback(
+    (value) => setPrimaryButtonborder(value),
+    []
+  );
+  const handlPrimaryButtonCornerRadius = useCallback(
+    (value) => setPrimaryCornerRadius(value),
+    []
+  );
+  const handlPrimaryButtonblockPadding = useCallback(
+    (value) => setPrimaryBlockPadding(value),
+    []
+  );
+  const handlPrimaryInlinePadding = useCallback(
+    (value) => setPrimaryInlinePadding(value),
+    []
+  );
+  const handlPrimaryLetterCase = useCallback(
+    (value) => setPrimaryLetterCase(value),
+    []
+  );
+  const handlweight = useCallback((value) => setPrimaryWeight(value), []);
+  const handlPrimarySize = useCallback((value) => setPrimarySize(value), []);
+  const handlfont = useCallback((value) => setPrimaryfont(value), []);
+  const handlPrimarykerning = useCallback(
+    (value) => setPrimaryKerning(value),
+    []
+  );
+  const handlSecondaryButtonbackground = useCallback(
+    (value) => setSecondryButtonbackground(value),
+    []
+  );
+  const handlSecondaryButtonborder = useCallback(
+    (value) => setSecondryButtonborder(value),
+    []
+  );
+  const handlSecondaryButtonCornerRadius = useCallback(
+    (value) => setSecondryCornerRadius(value),
+    []
+  );
+  const handlSecondaryButtonblockPadding = useCallback(
+    (value) => setSecondryBlockPadding(value),
+    []
+  );
+  const handlSecondaryInlinePadding = useCallback(
+    (value) => setSecondryInlinePadding(value),
+    []
+  );
+  const handlSecondaryfont = useCallback((value) => setSecondryfont(value), []);
+  const handlSecondarySize = useCallback((value) => setSecondrySize(value), []);
+  const handlSecondaryweight = useCallback(
+    (value) => setSecondryWeight(value),
+    []
+  );
+  const handlSecondaryLetterCase = useCallback(
+    (value) => setSecondryLetterCase(value),
+    []
+  );
+  const handlSecondarykerning = useCallback(
+    (value) => setSecondryKerning(value),
+    []
+  );
+  const handlSelectborder = useCallback((value) => setSelectborder(value), []);
+  const handlSelectfont = useCallback((value) => setSelectfont(value), []);
+  const handlSelectsize = useCallback((value) => setSelectsize(value), []);
+  const handlSelectweight = useCallback((value) => setSelectweight(value), []);
+  const handlSelectkerning = useCallback(
+    (value) => setSelectkerning(value),
+    []
+  );
+  const handlTextFieldborder = useCallback(
+    (value) => setTextFieldborder(value),
+    []
+  );
+  const handlTextFieldfont = useCallback(
+    (value) => setTextFieldfont(value),
+    []
+  );
+  const handlTextFieldsize = useCallback(
+    (value) => setTextFieldsize(value),
+    []
+  );
+  const handlTextFieldweight = useCallback(
+    (value) => setTextFieldweight(value),
+    []
+  );
+  const handlTextFieldletterCase = useCallback(
+    (value) => setTextFieldletterCase(value),
+    []
+  );
+  const handlTextFieldkerning = useCallback(
+    (value) => setTextFieldkerning(value),
+    []
+  );
   const handlecheckoutid = useCallback((value) => setCheckoputid(value), []);
   const checkoutid = checkoutProfiles.map((profile) => {
     const idWithoutPrefix = profile.node.id.replace(
@@ -352,7 +563,73 @@ export default function AdditionalPage() {
     { label: "NONE", value: "NONE" },
     { label: "SMALL", value: "SMALL" },
   ];
-
+  const backgroundoption = [
+    { label: "NOT SELECTED", value: "" },
+    { label: "SOLID", value: "SOLID" },
+    { label: "NONE", value: "NONE" },
+  ];
+  const font = [
+    { label: "PRIMARY", value: "PRIMARY" },
+    { label: "SECONDARY", value: "SECONDARY" },
+  ];
+  const borderOption = [
+    { label: "NOT SELECTED", value: "" },
+    { label: "FULL", value: "FULL" },
+    { label: "NONE", value: "NONE" },
+  ];
+  const weight = [
+    { label: "BASE", value: "BASE" },
+    { label: "BOLD", value: "BOLD" },
+  ];
+  const blockPadding = [
+    { label: "NONE", value: "NONE" },
+    { label: "EXTRA_TIGHT", value: "EXTRA_TIGHT" },
+    { label: "TIGHT", value: "TIGHT" },
+    { label: "BASE", value: "BASE" },
+    { label: "LOOSE", value: "LOOSE" },
+    { label: "EXTRA_LOOSE", value: "EXTRA_LOOSE" },
+  ];
+  const size = [
+    { label: "EXTRA_SMALL", value: "EXTRA_SMALL" },
+    { label: "SMALL", value: "SMALL" },
+    { label: "BASE", value: "BASE" },
+    { label: "MEDIUM", value: "MEDIUM" },
+    { label: "LARGE", value: "LARGE" },
+    { label: "EXTRA_LARGE", value: "EXTRA_LARGE" },
+    { label: "EXTRA_EXTRA_LARGE", value: "EXTRA_EXTRA_LARGE" },
+  ];
+  const letterCase = [
+    { label: "LOWER", value: "LOWER" },
+    { label: "NONE", value: "NONE" },
+    { label: "TITLE", value: "TITLE" },
+    { label: "UPPER", value: "UPPER" },
+  ];
+  const kerning = [
+    { label: "BASE", value: "BASE" },
+    { label: "LOOSE", value: "LOOSE" },
+    { label: "EXTRA_LOOSE", value: "EXTRA_LOOSE" },
+  ];
+  const choiceListgroupspacingotion = [
+    { label: "NONE", value: "NONE" },
+    { label: "BASE", value: "BASE" },
+    { label: "SMALL", value: "SMALL" },
+    { label: "SMALL_100", value: "SMALL_100" },
+    { label: "SMALL_100", value: "SMALL_200" },
+    { label: "SMALL_100", value: "SMALL_300" },
+    { label: "SMALL_100", value: "SMALL_400" },
+    { label: "SMALL_100", value: "SMALL_500" },
+    { label: "LARGE", value: "LARGE" },
+    { label: "LARGE_100", value: "LARGE_100" },
+    { label: "LARGE_100", value: "LARGE_200" },
+    { label: "LARGE_100", value: "LARGE_300" },
+    { label: "LARGE_100", value: "LARGE_400" },
+    { label: "LARGE_100", value: "LARGE_500" },
+  ];
+  const selectborderoption = [
+    { label: "NONE", value: "NONE" },
+    { label: "BLOCK_END", value: "BLOCK_END" },
+    { label: "FULL", value: "FULL" },
+  ];
   const generateProduct = () =>
     submit(
       {
@@ -364,6 +641,39 @@ export default function AdditionalPage() {
         shop,
         merchandiseThumbnailBorder,
         merchandiseThumbnailCornerRadius,
+        primaryButtonbackground,
+        primaryButtonborder,
+        primaryCornerRadius,
+        primaryBlockPadding,
+        primaryInlinePadding,
+        primaryfont,
+        primarySize,
+        primaryWeight,
+        primaryLetterCase,
+        primaryKerning,
+        secondryButtonbackground,
+        secondryButtonborder,
+        secondryCornerRadius,
+        secondryBlockPadding,
+        secondryInlinePadding,
+        secondryfont,
+        secondrySize,
+        secondryWeight,
+        secondryLetterCase,
+        secondryKerning,
+        choiceListgroupspacing,
+        selectborder,
+        selectfont,
+        selectsize,
+        selectweight,
+        selectkerning,
+        selectletterCase,
+        textFieldborder,
+        textFieldfont,
+        textFieldsize,
+        textFieldweight,
+        textFieldletterCase,
+        textFieldkerning,
       },
       { replace: true, method: "POST" }
     );
@@ -381,6 +691,14 @@ export default function AdditionalPage() {
               />
             </Box>
             <BlockStack gap="500">
+              <Card>
+                <Select
+                  label="Choice List group spacing"
+                  options={choiceListgroupspacingotion}
+                  onChange={handlechoiceListgroupspacing}
+                  value={choiceListgroupspacing}
+                />
+              </Card>
               <Card>
                 <Select
                   label="checkbox cornerRadius"
@@ -422,6 +740,256 @@ export default function AdditionalPage() {
                   onChange={handleMerchandiseThumbnailCornerRadius}
                   value={merchandiseThumbnailCornerRadius}
                 />
+              </Card>
+              <Card>
+                <ExceptionList
+                  items={[
+                    {
+                      description: "PrimaryButton",
+                    },
+                  ]}
+                />
+                <Select
+                  label="PrimaryButton background"
+                  options={backgroundoption}
+                  onChange={handlPrimaryButtonbackground}
+                  value={primaryButtonbackground}
+                />
+                <Select
+                  label="PrimaryButton border"
+                  options={borderOption}
+                  onChange={handlPrimaryButtonborder}
+                  value={primaryButtonborder}
+                />
+                <Select
+                  label="PrimaryButton CornerRadius"
+                  options={optionMerchandiseThumbnailCornerRadius}
+                  onChange={handlPrimaryButtonCornerRadius}
+                  value={primaryCornerRadius}
+                />
+                <Select
+                  label="PrimaryButton blockPadding"
+                  options={blockPadding}
+                  onChange={handlPrimaryButtonblockPadding}
+                  value={primaryBlockPadding}
+                />
+                <Select
+                  label="PrimaryButton inlinePadding"
+                  options={blockPadding}
+                  onChange={handlPrimaryInlinePadding}
+                  value={primaryInlinePadding}
+                />
+                <Card>
+                  <Select
+                    label="PrimaryButton font"
+                    options={font}
+                    onChange={handlfont}
+                    value={primaryfont}
+                  />
+                  <Select
+                    label="PrimaryButton size"
+                    options={size}
+                    onChange={handlPrimarySize}
+                    value={primarySize}
+                  />
+                  <Select
+                    label="PrimaryButton weight"
+                    options={weight}
+                    onChange={handlweight}
+                    value={primaryWeight}
+                  />
+                  <Select
+                    label="PrimaryButton letterCase"
+                    options={letterCase}
+                    onChange={handlPrimaryLetterCase}
+                    value={primaryLetterCase}
+                  />
+                  <Select
+                    label="PrimaryButton kerning"
+                    options={kerning}
+                    onChange={handlPrimarykerning}
+                    value={primaryKerning}
+                  />
+                </Card>
+              </Card>
+              <Card>
+                <ExceptionList
+                  items={[
+                    {
+                      description: "secondaryButton",
+                    },
+                  ]}
+                />
+                <Select
+                  label="secondaryButton background"
+                  options={backgroundoption}
+                  onChange={handlSecondaryButtonbackground}
+                  value={secondryButtonbackground}
+                />
+                <Select
+                  label="secondaryButton border"
+                  options={borderOption}
+                  onChange={handlSecondaryButtonborder}
+                  value={secondryButtonborder}
+                />
+                <Select
+                  label="secondaryButton CornerRadius"
+                  options={optionMerchandiseThumbnailCornerRadius}
+                  onChange={handlSecondaryButtonCornerRadius}
+                  value={secondryCornerRadius}
+                />
+                <Select
+                  label="secondaryButton blockPadding"
+                  options={blockPadding}
+                  onChange={handlSecondaryButtonblockPadding}
+                  value={secondryBlockPadding}
+                />
+                <Select
+                  label="secondaryButton inlinePadding"
+                  options={blockPadding}
+                  onChange={handlSecondaryInlinePadding}
+                  value={secondryInlinePadding}
+                />
+                <Card>
+                  <Select
+                    label="secondaryButton font"
+                    options={font}
+                    onChange={handlSecondaryfont}
+                    value={secondryfont}
+                  />
+                  <Select
+                    label="secondaryButton size"
+                    options={size}
+                    onChange={handlSecondarySize}
+                    value={secondrySize}
+                  />
+                  <Select
+                    label="secondaryButton weight"
+                    options={weight}
+                    onChange={handlSecondaryweight}
+                    value={secondryWeight}
+                  />
+                  <Select
+                    label="secondaryButton letterCase"
+                    options={letterCase}
+                    onChange={handlSecondaryLetterCase}
+                    value={secondryLetterCase}
+                  />
+                  <Select
+                    label="secondaryButton kerning"
+                    options={kerning}
+                    onChange={handlSecondarykerning}
+                    value={secondryKerning}
+                  />
+                </Card>
+              </Card>
+              <Card>
+                <ExceptionList
+                  items={[
+                    {
+                      description: "select",
+                    },
+                  ]}
+                />
+                <Select
+                  label="Select border"
+                  options={selectborderoption}
+                  onChange={handlSelectborder}
+                  value={selectborder}
+                />
+                <Card>
+                  <ExceptionList
+                    items={[
+                      {
+                        description: "Select typography",
+                      },
+                    ]}
+                  />
+                  <Select
+                    label="Select font"
+                    options={font}
+                    onChange={handlSelectfont}
+                    value={selectfont}
+                  />
+                  <Select
+                    label="Select size"
+                    options={size}
+                    onChange={handlSelectsize}
+                    value={selectsize}
+                  />
+                  <Select
+                    label="Select weight"
+                    options={weight}
+                    onChange={handlSelectweight}
+                    value={selectweight}
+                  />
+                  <Select
+                    label="Select letterCase"
+                    options={letterCase}
+                    onChange={handlSelectletterCase}
+                    value={selectletterCase}
+                  />
+                  <Select
+                    label="Select kerning"
+                    options={kerning}
+                    onChange={handlSelectkerning}
+                    value={selectkerning}
+                  />
+                </Card>
+              </Card>
+              <Card>
+                <ExceptionList
+                  items={[
+                    {
+                      description: "TextField",
+                    },
+                  ]}
+                />
+                <Select
+                  label="TextField border"
+                  options={selectborderoption}
+                  onChange={handlTextFieldborder}
+                  value={textFieldborder}
+                />
+                <Card>
+                  <ExceptionList
+                    items={[
+                      {
+                        description: "TextField typography",
+                      },
+                    ]}
+                  />
+                  <Select
+                    label="TextField font"
+                    options={font}
+                    onChange={handlTextFieldfont}
+                    value={textFieldfont}
+                  />
+                  <Select
+                    label="TextField size"
+                    options={size}
+                    onChange={handlTextFieldsize}
+                    value={textFieldsize}
+                  />
+                  <Select
+                    label="TextField weight"
+                    options={weight}
+                    onChange={handlTextFieldweight}
+                    value={textFieldweight}
+                  />
+                  <Select
+                    label="TextField letterCase"
+                    options={letterCase}
+                    onChange={handlTextFieldletterCase}
+                    value={textFieldletterCase}
+                  />
+                  <Select
+                    label="TextField kerning"
+                    options={kerning}
+                    onChange={handlTextFieldkerning}
+                    value={textFieldkerning}
+                  />
+                </Card>
               </Card>
               <InlineStack gap="300">
                 <Button loading={isLoading} onClick={generateProduct}>
