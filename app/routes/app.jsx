@@ -23,6 +23,8 @@ export default function App() {
           Home
         </Link>
         <Link to="/app/additional">Additional page</Link>
+        <Link to="/app/colour">colour page</Link>
+        <Link to="/app/font">font page</Link>
       </ui-nav-menu>
       <Outlet />
     </AppProvider>

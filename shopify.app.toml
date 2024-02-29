@@ -1,19 +1,19 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-name = "poc-checkoout-branding"
-client_id = "9bd630d8a02451b78229f816cd343ff5"
-application_url = "https://physical-authorities-listed-configured.trycloudflare.com"
+name = "checkout-branding-alpha"
+client_id = "970f81b44892ea4b3f6c582a73bc2874"
+application_url = "https://comm-paying-tee-back.trycloudflare.com"
 embedded = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products,read_checkout_branding_settings,write_checkout_branding_settings,read_checkouts,write_checkouts"
+scopes = "write_products,read_checkout_branding_settings,write_checkout_branding_settings,read_checkouts,write_checkouts,read_products,write_files,read_files"
 
 [auth]
 redirect_urls = [
-  "https://physical-authorities-listed-configured.trycloudflare.com/auth/callback",
-  "https://physical-authorities-listed-configured.trycloudflare.com/auth/shopify/callback",
-  "https://physical-authorities-listed-configured.trycloudflare.com/api/auth/callback"
+  "https://comm-paying-tee-back.trycloudflare.com/auth/callback",
+  "https://comm-paying-tee-back.trycloudflare.com/auth/shopify/callback",
+  "https://comm-paying-tee-back.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

@@ -355,47 +355,49 @@ export default function AdditionalPage() {
   const [cornerRadius, setCornerRadius] = useState("BASE");
   const [checkoputid, setCheckoputid] = useState(null);
   const [controlCorner, setControlCorner] = useState("BASE");
-  const [controlBorder, setControlBorder] = useState("");
-  const [choiceListgroupspacing, setChoiceListgroupspacing] = useState("");
-  const [controLabelPosition, setControlLabelPosition] = useState("");
+  const [controlBorder, setControlBorder] = useState("NONE");
+  const [choiceListgroupspacing, setChoiceListgroupspacing] = useState("NONE");
+  const [controLabelPosition, setControlLabelPosition] = useState("INSIDE");
   const [
     merchandiseThumbnailCornerRadius,
     setMerchandiseThumbnailCornerRadius,
-  ] = useState("");
-  const [primaryButtonbackground, setPrimaryButtonbackground] = useState("");
+  ] = useState("NONE");
+  const [primaryButtonbackground, setPrimaryButtonbackground] =
+    useState("NONE");
   const [merchandiseThumbnailBorder, setMerchandiseThumbnailBorder] =
-    useState("");
-  const [primaryButtonborder, setPrimaryButtonborder] = useState("");
-  const [primaryCornerRadius, setPrimaryCornerRadius] = useState("");
-  const [primaryBlockPadding, setPrimaryBlockPadding] = useState("");
-  const [primaryInlinePadding, setPrimaryInlinePadding] = useState("");
-  const [primaryfont, setPrimaryfont] = useState("");
-  const [primarySize, setPrimarySize] = useState("");
-  const [primaryWeight, setPrimaryWeight] = useState("");
-  const [primaryLetterCase, setPrimaryLetterCase] = useState("");
-  const [primaryKerning, setPrimaryKerning] = useState("");
-  const [secondryButtonbackground, setSecondryButtonbackground] = useState("");
-  const [secondryButtonborder, setSecondryButtonborder] = useState("");
-  const [secondryCornerRadius, setSecondryCornerRadius] = useState("");
-  const [secondryBlockPadding, setSecondryBlockPadding] = useState("");
-  const [secondryInlinePadding, setSecondryInlinePadding] = useState("");
-  const [secondryfont, setSecondryfont] = useState("");
-  const [secondrySize, setSecondrySize] = useState("");
-  const [secondryWeight, setSecondryWeight] = useState("");
-  const [secondryLetterCase, setSecondryLetterCase] = useState("");
-  const [secondryKerning, setSecondryKerning] = useState("");
-  const [selectborder, setSelectborder] = useState("");
-  const [selectfont, setSelectfont] = useState("");
-  const [selectsize, setSelectsize] = useState("");
-  const [selectweight, setSelectweight] = useState("");
-  const [selectkerning, setSelectkerning] = useState("");
-  const [selectletterCase, setSelectletterCase] = useState("");
-  const [textFieldborder, setTextFieldborder] = useState("");
-  const [textFieldfont, setTextFieldfont] = useState("");
-  const [textFieldsize, setTextFieldsize] = useState("");
-  const [textFieldweight, setTextFieldweight] = useState("");
-  const [textFieldletterCase, setTextFieldletterCase] = useState("");
-  const [textFieldkerning, setTextFieldkerning] = useState("");
+    useState("NONE");
+  const [primaryButtonborder, setPrimaryButtonborder] = useState("NONE");
+  const [primaryCornerRadius, setPrimaryCornerRadius] = useState("NONE");
+  const [primaryBlockPadding, setPrimaryBlockPadding] = useState("NONE");
+  const [primaryInlinePadding, setPrimaryInlinePadding] = useState("NONE");
+  const [primaryfont, setPrimaryfont] = useState("PRIMARY");
+  const [primarySize, setPrimarySize] = useState("BASE");
+  const [primaryWeight, setPrimaryWeight] = useState("BASE");
+  const [primaryLetterCase, setPrimaryLetterCase] = useState("NONE");
+  const [primaryKerning, setPrimaryKerning] = useState("BASE");
+  const [secondryButtonbackground, setSecondryButtonbackground] =
+    useState("NONE");
+  const [secondryButtonborder, setSecondryButtonborder] = useState("NONE");
+  const [secondryCornerRadius, setSecondryCornerRadius] = useState("NONE");
+  const [secondryBlockPadding, setSecondryBlockPadding] = useState("NONE");
+  const [secondryInlinePadding, setSecondryInlinePadding] = useState("NONE");
+  const [secondryfont, setSecondryfont] = useState("PRIMARY");
+  const [secondrySize, setSecondrySize] = useState("BASE");
+  const [secondryWeight, setSecondryWeight] = useState("BASE");
+  const [secondryLetterCase, setSecondryLetterCase] = useState("NONE");
+  const [secondryKerning, setSecondryKerning] = useState("BASE");
+  const [selectborder, setSelectborder] = useState("NONE");
+  const [selectfont, setSelectfont] = useState("PRIMARY");
+  const [selectsize, setSelectsize] = useState("BASE");
+  const [selectweight, setSelectweight] = useState("BASE");
+  const [selectkerning, setSelectkerning] = useState("BASE");
+  const [selectletterCase, setSelectletterCase] = useState("NONE");
+  const [textFieldborder, setTextFieldborder] = useState("FULL");
+  const [textFieldfont, setTextFieldfont] = useState("PRIMARY");
+  const [textFieldsize, setTextFieldsize] = useState("BASE");
+  const [textFieldweight, setTextFieldweight] = useState("BASE");
+  const [textFieldletterCase, setTextFieldletterCase] = useState("NONE");
+  const [textFieldkerning, setTextFieldkerning] = useState("BASE");
   // useEffect(() => {
   //   if (allUsers && allUsers.length > 0) {
   //     const userWithCheckoputid = allUsers.find(
@@ -564,7 +566,6 @@ export default function AdditionalPage() {
     { label: "SMALL", value: "SMALL" },
   ];
   const backgroundoption = [
-    { label: "NOT SELECTED", value: "" },
     { label: "SOLID", value: "SOLID" },
     { label: "NONE", value: "NONE" },
   ];
@@ -573,7 +574,6 @@ export default function AdditionalPage() {
     { label: "SECONDARY", value: "SECONDARY" },
   ];
   const borderOption = [
-    { label: "NOT SELECTED", value: "" },
     { label: "FULL", value: "FULL" },
     { label: "NONE", value: "NONE" },
   ];

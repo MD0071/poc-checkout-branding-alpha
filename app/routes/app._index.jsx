@@ -235,7 +235,6 @@ export const action = async ({ request }) => {
 export default function Index() {
   const nav = useNavigation();
   const { checkoutProfiles, allUsers, shop } = useLoaderData();
-  // console.log(allUsers, "data base data🤣");
   const submit = useSubmit();
   const isLoading =
     ["loading", "submitting"].includes(nav.state) && nav.formMethod === "POST";
